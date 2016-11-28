@@ -38,7 +38,8 @@
   },
   "browserify": {
     "transform": [
-      "babelify"
+      "babelify",
+      "glslify-sync/transform"
     ]
   }
 }
