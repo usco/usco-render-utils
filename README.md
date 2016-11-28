@@ -9,7 +9,7 @@
 
 > renderer components for usco project
 
-This is a set of rendering helpers
+This is a set of rendering helpers, not a 'renderer' per se
 
 - coded in es6
 - uses regl as functional WebGL framework
