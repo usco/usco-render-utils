@@ -20,8 +20,7 @@
     "gl-vec3": "^1.0.3",
     "glsl-fog": "0.0.1",
     "glslify": "^5.0.2",
-    "glslify-sync": "^2.0.0",
-    "regl": "^1.3.0"
+    "glslify-sync": "^2.0.0"
   },
   "devDependencies": {
     "ava": "^0.15.2",
@@ -34,7 +33,8 @@
     "budo": "^8.3.0",
     "minifyify": "^7.3.3",
     "rollupify": "^0.3.4",
-    "watchify": "^3.7.0"
+    "watchify": "^3.7.0",
+    "regl": "^1.3.0"
   },
   "browserify": {
     "transform": [
