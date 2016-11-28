@@ -1,4 +1,4 @@
-export {default as prepareRender} from './render'
+//export {default as prepareRender} from './render'
 export {default as wrapperScope} from './wrapperScope'
 
 export {default as drawCuboid} from './drawCuboid'
