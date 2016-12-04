@@ -6,7 +6,7 @@
   "module": "src/index.js",
   "scripts": {
     "test": "ava './src/common/**/*.test.js' --require babel-register --verbose",
-    "build": "babel src/ -d dist",
+    "build": "babel src/ -d dist --copy-files",
     "start-dev": "budo src/main/index.js:dist/viewer.js --port=8080 --live -- -t babelify",
     "release-patch": "git checkout master; npm version patch && npm run build; git commit -a -m 'chore(dist): built dist/'; git push origin master --tags ",
     "release-minor": "git checkout master; npm version minor && npm run build; git commit -a -m 'chore(dist): built dist/'; git push origin master --tags ",
