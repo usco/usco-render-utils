@@ -41,6 +41,8 @@ function drawMesh(regl) {
   };
   if (geometry.cells) {
     commandParams.elements = geometry.cells;
+  } else if (geometry.indices) {
+    commandParams.elements = geometry.indices;
   } else {
     commandParams.count = geometry.positions.length / 3;
   }

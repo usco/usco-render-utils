@@ -23,6 +23,8 @@ export default function drawMesh (regl, params = {extras: {}}) {
   }
   if (geometry.cells) {
     commandParams.elements = geometry.cells
+  } else if (geometry.indices) {
+    commandParams.elements = geometry.indices
   } else {
     commandParams.count = geometry.positions.length / 3
   }
