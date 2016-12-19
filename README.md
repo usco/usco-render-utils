@@ -1,15 +1,15 @@
-# usco-renderer
+# usco-render-utils
 
-[![GitHub version](https://badge.fury.io/gh/usco%2Fusco-renderer.svg)](https://badge.fury.io/gh/usco%2Fusco-renderer)
+[![GitHub version](https://badge.fury.io/gh/usco%2Fusco-render-utils.svg)](https://badge.fury.io/gh/usco%2Fusco-render-utils)
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
-[![Build Status](https://travis-ci.org/usco/usco-renderer.svg)](https://travis-ci.org/usco/usco-renderer)
-[![Dependency Status](https://david-dm.org/usco/usco-renderer.svg)](https://david-dm.org/usco/usco-renderer)
-[![devDependency Status](https://david-dm.org/usco/usco-renderer/dev-status.svg)](https://david-dm.org/usco/usco-renderer#info=devDependencies)
+[![Build Status](https://travis-ci.org/usco/usco-render-utils.svg)](https://travis-ci.org/usco/usco-render-utils)
+[![Dependency Status](https://david-dm.org/usco/usco-render-utils.svg)](https://david-dm.org/usco/usco-render-utils)
+[![devDependency Status](https://david-dm.org/usco/usco-render-utils/dev-status.svg)](https://david-dm.org/usco/usco-render-utils#info=devDependencies)
 
 
-> renderer components for usco project
+> rendering helpers for usco project
 
-This is a set of rendering helpers, not a 'renderer' per se
+This is a set of rendering helpers
 
 - coded in es6
 - uses regl as functional WebGL framework
@@ -69,5 +69,5 @@ Small note: If editing the Readme, please conform to the [standard-readme](https
 
 ## License
 
-[The MIT License (MIT)](https://github.com/usco/usco-renderer/blob/master/LICENSE)
+[The MIT License (MIT)](https://github.com/usco/usco-render-utils/blob/master/LICENSE)
 (unless specified otherwise)
