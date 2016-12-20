@@ -21,10 +21,25 @@ export default function drawMesh (regl, params = {extras: {}}) {
       face: 'back'
     }
   }
+
   if (geometry.cells) {
     commandParams.elements = geometry.cells
   } else if (geometry.indices) {
-    commandParams.elements = geometry.indices
+    //FIXME: not entirely sure about all this
+    const indices = geometry.indices
+    /*let type
+    if (indices instanceof Uint32Array && regl.hasExtension('oes_element_index_uint')) {
+      type = 'uint32'
+    }else if (indices instanceof Uint16Array) {
+      type = 'uint16'
+    } else {
+      type = 'uint8'
+    }*/
+
+    commandParams.elements = regl.elements({
+      //type,
+      data: indices
+    })
   } else {
     commandParams.count = geometry.positions.length / 3
   }
