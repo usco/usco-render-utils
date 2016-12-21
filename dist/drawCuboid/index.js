@@ -55,7 +55,7 @@ function drawCuboid(regl, params) {
       }
     },
     primitive: 'line strip',
-    lineWidth: 2,
+    lineWidth: Math.min(2, regl.limits.lineWidthDims[1]),
 
     depth: {
       enable: true,

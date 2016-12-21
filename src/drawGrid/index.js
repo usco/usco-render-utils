@@ -27,21 +27,20 @@ export default function prepareDrawGrid (regl, params = {}) {
 
     const skipEvery = 0
 
-    for (let i = widthStart, j=0; i <= widthEnd; i += ticks, j+=1) {
-      if(j%skipEvery !==0){
+    for (let i = widthStart, j = 0; i <= widthEnd; i += ticks, j += 1) {
+      if (j % skipEvery !== 0) {
         positions.push(lengthStart, i, 0)
         positions.push(lengthEnd, i, 0)
         positions.push(lengthStart, i, 0)
       }
     }
-    for (let i = lengthStart, j=0; i <= lengthEnd; i += ticks, j+=1) {
-      if(j%skipEvery !==0){
+    for (let i = lengthStart, j = 0; i <= lengthEnd; i += ticks, j += 1) {
+      if (j % skipEvery !== 0) {
         positions.push(i, widthStart, 0)
         positions.push(i, widthEnd, 0)
         positions.push(i, widthStart, 0)
       }
     }
-
   } else {
     for (let i = -width * 0.5; i <= width * 0.5; i += ticks) {
       positions.push(-length * 0.5, i, 0)
@@ -75,7 +74,7 @@ export default function prepareDrawGrid (regl, params = {}) {
       color: regl.prop('color'),
       fogColor: (context, props) => props.fogColor || [1, 1, 1, 1]
     },
-    lineWidth: 1,// was 2 but now that breaks in chrome...
+    lineWidth: Math.min(2, regl.limits.lineWidthDims[1]),
     primitive: 'lines',
     cull: {
       enable: true,

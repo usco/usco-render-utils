@@ -31,7 +31,7 @@ export default function drawCuboidFromCoords (regl, params) {
       angle: ({tick}) => 0.01 * tick
     },
     primitive: 'line strip',
-    lineWidth: 3,
+    lineWidth: Math.min(3, regl.limits.lineWidthDims[1]),
 
     depth: {
       enable: true,

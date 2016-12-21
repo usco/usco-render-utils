@@ -95,7 +95,7 @@ function prepareDrawGrid(regl) {
         return props.fogColor || [1, 1, 1, 1];
       }
     },
-    lineWidth: 1, // was 2 but now that breaks in chrome...
+    lineWidth: Math.min(2, regl.limits.lineWidthDims[1]),
     primitive: 'lines',
     cull: {
       enable: true,
