@@ -35,6 +35,13 @@ function drawMesh(regl) {
     cull: {
       enable: false,
       face: 'front'
+    },
+    blend: {
+      enable: true,
+      func: {
+        src: 'src alpha',
+        dst: 'one minus src alpha'
+      }
     }
   };
 

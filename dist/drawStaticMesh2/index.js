@@ -18,15 +18,28 @@ function drawMesh(regl) {
       buffer = regl.buffer;
   var geometry = params.geometry;
 
+  // vertex colors or not ?
+
+  var hasIndices = geometry.indices && geometry.indices.length > 0;
+  var hasNormals = geometry.normals && geometry.normals.length > 0;
+  var hasVertexColors = geometry.colors && geometry.colors.length > 0;
+  //console.log('has vertex colors', hasVertexColors)
+
+  var vert = hasVertexColors ? glslify(__dirname + '/shaders/mesh-vcolor.vert') : glslify(__dirname + '/shaders/mesh.vert');
+  var frag = hasVertexColors ? glslify(__dirname + '/shaders/mesh-vcolor.frag') : glslify(__dirname + '/shaders/mesh.frag');
+
+  //const vert = glslify(__dirname + '/shaders/mesh-vcolor.vert')
+  //const frag = glslify(__dirname + '/shaders/mesh-vcolor.frag')
+
   var commandParams = {
-    vert: glslify(__dirname + '/shaders/mesh.vert'),
-    frag: glslify(__dirname + '/shaders/mesh.frag'),
+    vert: vert,
+    frag: frag,
 
     uniforms: {
       model: function model(context, props) {
         return props.model || _glMat2.default.identity([]);
       },
-      color: prop('color'),
+      ucolor: prop('color'),
       printableArea: function printableArea(context, props) {
         return props.printableArea || [0, 0];
       }
@@ -37,13 +50,20 @@ function drawMesh(regl) {
     cull: {
       enable: true,
       face: 'back'
+    },
+    blend: {
+      enable: true,
+      func: {
+        src: 'src alpha',
+        dst: 'one minus src alpha'
+      }
     }
   };
 
   if (geometry.cells) {
     commandParams.elements = geometry.cells;
-  } else if (geometry.indices) {
-    //FIXME: not entirely sure about all this
+  } else if (hasIndices) {
+    // FIXME: not entirely sure about all this
     var indices = geometry.indices;
     /*let type
     if (indices instanceof Uint32Array && regl.hasExtension('oes_element_index_uint')) {
@@ -55,16 +75,20 @@ function drawMesh(regl) {
     }*/
 
     commandParams.elements = regl.elements({
-      //type,
+      // type,
       data: indices
     });
   } else {
     commandParams.count = geometry.positions.length / 3;
   }
 
-  if (geometry.normals) {
+  if (hasNormals) {
     commandParams.attributes.normal = buffer(geometry.normals);
   }
+  if (hasVertexColors) {
+    commandParams.attributes.color = buffer(geometry.colors);
+  }
+
   // Splice in any extra params
   commandParams = Object.assign({}, commandParams, params.extras);
   return regl(commandParams);
