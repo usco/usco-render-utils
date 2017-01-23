@@ -4,9 +4,11 @@ uniform float camNear, camFar;
 uniform mat4 model, view, projection;
 
 attribute vec3 position, normal;
+attribute vec4 color;
 
 varying vec3 fragNormal, fragPosition;
 varying vec4 _worldSpacePosition;
+varying vec4 vColor;
 
 #pragma glslify: zBufferAdjust = require('../../shaders/zBufferAdjust')
 
@@ -17,6 +19,7 @@ void main() {
   _worldSpacePosition = worldSpacePosition;
   //gl_Position = projection * view * worldSpacePosition;
 
+  vColor = color;
 
   vec4 glPosition = projection * view * model * vec4(position, 1);
   gl_Position = glPosition;

@@ -86,6 +86,13 @@ export default function prepareDrawGrid (regl, params = {}) {
         factor: 1,
         units: Math.random() * 10
       }
+    },
+    blend: {
+      enable: true,
+      func: {
+        src: 'src alpha',
+        dst: 'one minus src alpha'
+      }
     }
 
   })

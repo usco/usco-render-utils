@@ -19,6 +19,13 @@ export default function drawMesh (regl, params = {extras: {}}) {
     cull: {
       enable: false,
       face: 'front'
+    },
+    blend: {
+      enable: true,
+      func: {
+        src: 'src alpha',
+        dst: 'one minus src alpha'
+      }
     }
   }
 

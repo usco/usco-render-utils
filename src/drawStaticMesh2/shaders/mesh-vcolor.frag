@@ -15,22 +15,24 @@ precision mediump float;
 varying vec3 fragNormal;
 uniform float ambientLightAmount;
 uniform float diffuseLightAmount;
-uniform vec4 ucolor;
+
 uniform vec3 lightDir;
 uniform vec3 opacity;
 
 varying vec4 _worldSpacePosition;
+varying vec4 vColor;
 
 uniform vec2 printableArea;
 
 vec4 errorColor = vec4(0.15, 0.15, 0.15, 0.3);//vec4(0.15, 0.15, 0.15, 0.3);
 
 
+
 void main () {
   vec4 depth = gl_FragCoord;
 
   float v = 0.8; // shadow value
-  vec4 endColor = ucolor;
+  vec4 endColor = vColor;//color;
 
   //if anything is outside the printable area, shade differently
   /*if(_worldSpacePosition.x>printableArea.x*0.5 || _worldSpacePosition.x<-printableArea.x*0.5){
