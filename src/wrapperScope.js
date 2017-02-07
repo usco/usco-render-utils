@@ -12,11 +12,11 @@ export default function wrapperScope (regl, params = {}) {
     },
     uniforms: {
       lightDir: (context) => context.lightDir,
+      lightColor: [1, 0.8, 0],
       lightView: (context) => {
         return mat4.lookAt([], context.lightDir, [0.0, 0.0, 0.0], [0.0, 0.0, 1.0])
       },
       lightProjection: mat4.ortho([], -25, 25, -20, 20, -25, 25),
-      lightColor: [1, 0.8, 0],
 
       ambientLightAmount: 0.8,
       diffuseLightAmount: 0.9,
