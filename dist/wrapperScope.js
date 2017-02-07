@@ -27,11 +27,11 @@ function wrapperScope(regl) {
       lightDir: function lightDir(context) {
         return context.lightDir;
       },
+      lightColor: [1, 0.8, 0],
       lightView: function lightView(context) {
         return _glMat2.default.lookAt([], context.lightDir, [0.0, 0.0, 0.0], [0.0, 0.0, 1.0]);
       },
       lightProjection: _glMat2.default.ortho([], -25, 25, -20, 20, -25, 25),
-      lightColor: [1, 0.8, 0],
 
       ambientLightAmount: 0.8,
       diffuseLightAmount: 0.9,
