@@ -3,12 +3,15 @@ import mat4 from 'gl-mat4'
 
 export default function prepareDrawGrid (regl, params = {}) {
   let positions = []
-  const infinite = params.infinite || false
-  const centered = params.centered || false
+  const defaults = {
+    ticks: 1,
+    size: [16, 16],
+    infinite: false,
+    centered: false,
+    lineWidth: 1
+  }
 
-  let {size, ticks} = params
-  ticks = ticks || 1
-  size = size || [16, 16]
+  let {size, ticks, infinite, centered, lineWidth} = Object.assign({}, defaults, params)
 
   const width = size[0]
   const length = size[1]
@@ -74,7 +77,7 @@ export default function prepareDrawGrid (regl, params = {}) {
       color: regl.prop('color'),
       fogColor: (context, props) => props.fogColor || [1, 1, 1, 1]
     },
-    lineWidth: Math.min(2, regl.limits.lineWidthDims[1]),
+    lineWidth: Math.min(lineWidth, regl.limits.lineWidthDims[1]),
     primitive: 'lines',
     cull: {
       enable: true,
