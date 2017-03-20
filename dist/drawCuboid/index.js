@@ -16,7 +16,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var glslify = require('glslify-sync'); // works in client & server
 function drawCuboid(regl, params) {
-  var size = params.size;
+  var defaults = {
+    size: [10, 10, 10],
+    lineWidth: 1
+  };
+
+  var _Object$assign = Object.assign({}, defaults, params),
+      size = _Object$assign.size,
+      lineWidth = _Object$assign.lineWidth;
 
   var _size = _slicedToArray(size, 3),
       width = _size[0],
@@ -48,14 +55,11 @@ function drawCuboid(regl, params) {
       model: function model(context, props) {
         return props.model || _glMat2.default.identity([]);
       },
-      color: regl.prop('color'),
-      angle: function angle(_ref) {
-        var tick = _ref.tick;
-        return 0.01 * tick;
-      }
+      color: regl.prop('color')
+      // angle: ({tick}) => 0.01 * tick
     },
     primitive: 'line strip',
-    lineWidth: Math.min(2, regl.limits.lineWidthDims[1]),
+    lineWidth: Math.min(lineWidth, regl.limits.lineWidthDims[1]),
 
     depth: {
       enable: true,
