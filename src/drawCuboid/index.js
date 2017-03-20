@@ -48,7 +48,7 @@ export default function drawCuboid (regl, params) {
       // angle: ({tick}) => 0.01 * tick
     },
     primitive: 'line strip',
-    lineWidth: Math.min(regl.prop('lineWidth') || lineWidth, regl.limits.lineWidthDims[1]),
+    lineWidth: (context, props) => Math.min((props.lineWidth || lineWidth), regl.limits.lineWidthDims[1]),
 
     depth: {
       enable: true,

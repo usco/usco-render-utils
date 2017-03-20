@@ -77,7 +77,7 @@ export default function prepareDrawGrid (regl, params = {}) {
       color: regl.prop('color'),
       fogColor: (context, props) => props.fogColor || [1, 1, 1, 1]
     },
-    lineWidth: Math.min(regl.prop('lineWidth') || lineWidth, regl.limits.lineWidthDims[1]),
+    lineWidth: (context, props) => Math.min((props.lineWidth || lineWidth), regl.limits.lineWidthDims[1]),
     primitive: 'lines',
     cull: {
       enable: true,
