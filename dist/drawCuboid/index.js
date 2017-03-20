@@ -59,13 +59,20 @@ function drawCuboid(regl, params) {
       // angle: ({tick}) => 0.01 * tick
     },
     primitive: 'line strip',
-    lineWidth: Math.min(lineWidth, regl.limits.lineWidthDims[1]),
+    lineWidth: Math.min(regl.prop('lineWidth') || lineWidth, regl.limits.lineWidthDims[1]),
 
     depth: {
       enable: true,
       mask: false,
       func: 'less',
       range: [0, 1]
+    },
+    blend: {
+      enable: true,
+      func: {
+        src: 'src alpha',
+        dst: 'one minus src alpha'
+      }
     }
   });
 }

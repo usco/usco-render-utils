@@ -101,7 +101,7 @@ function prepareDrawGrid(regl) {
         return props.fogColor || [1, 1, 1, 1];
       }
     },
-    lineWidth: Math.min(lineWidth, regl.limits.lineWidthDims[1]),
+    lineWidth: Math.min(regl.prop('lineWidth') || lineWidth, regl.limits.lineWidthDims[1]),
     primitive: 'lines',
     cull: {
       enable: true,
