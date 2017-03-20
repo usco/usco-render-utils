@@ -16,14 +16,20 @@ function prepareDrawGrid(regl) {
   var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   var positions = [];
-  var infinite = params.infinite || false;
-  var centered = params.centered || false;
+  var defaults = {
+    ticks: 1,
+    size: [16, 16],
+    infinite: false,
+    centered: false,
+    lineWidth: 1
+  };
 
-  var size = params.size,
-      ticks = params.ticks;
-
-  ticks = ticks || 1;
-  size = size || [16, 16];
+  var _Object$assign = Object.assign({}, defaults, params),
+      size = _Object$assign.size,
+      ticks = _Object$assign.ticks,
+      infinite = _Object$assign.infinite,
+      centered = _Object$assign.centered,
+      lineWidth = _Object$assign.lineWidth;
 
   var width = size[0];
   var length = size[1];
@@ -95,7 +101,7 @@ function prepareDrawGrid(regl) {
         return props.fogColor || [1, 1, 1, 1];
       }
     },
-    lineWidth: Math.min(2, regl.limits.lineWidthDims[1]),
+    lineWidth: Math.min(lineWidth, regl.limits.lineWidthDims[1]),
     primitive: 'lines',
     cull: {
       enable: true,
