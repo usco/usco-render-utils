@@ -29,7 +29,7 @@ function prepareDrawGrid(regl) {
       ticks = _Object$assign.ticks,
       infinite = _Object$assign.infinite,
       centered = _Object$assign.centered,
-      lineWidth = _Object$assign.lineWidth;
+      _lineWidth = _Object$assign.lineWidth;
 
   var width = size[0];
   var length = size[1];
@@ -101,7 +101,9 @@ function prepareDrawGrid(regl) {
         return props.fogColor || [1, 1, 1, 1];
       }
     },
-    lineWidth: Math.min(regl.prop('lineWidth') || lineWidth, regl.limits.lineWidthDims[1]),
+    lineWidth: function lineWidth(context, props) {
+      return Math.min(props.lineWidth || _lineWidth, regl.limits.lineWidthDims[1]);
+    },
     primitive: 'lines',
     cull: {
       enable: true,

@@ -23,7 +23,7 @@ function drawCuboid(regl, params) {
 
   var _Object$assign = Object.assign({}, defaults, params),
       size = _Object$assign.size,
-      lineWidth = _Object$assign.lineWidth;
+      _lineWidth = _Object$assign.lineWidth;
 
   var _size = _slicedToArray(size, 3),
       width = _size[0],
@@ -59,7 +59,9 @@ function drawCuboid(regl, params) {
       // angle: ({tick}) => 0.01 * tick
     },
     primitive: 'line strip',
-    lineWidth: Math.min(regl.prop('lineWidth') || lineWidth, regl.limits.lineWidthDims[1]),
+    lineWidth: function lineWidth(context, props) {
+      return Math.min(props.lineWidth || _lineWidth, regl.limits.lineWidthDims[1]);
+    },
 
     depth: {
       enable: true,
