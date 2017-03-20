@@ -2,7 +2,12 @@ var glslify = require('glslify-sync') // works in client & server
 import mat4 from 'gl-mat4'
 
 export default function drawCuboid (regl, params) {
-  const {size} = params
+  const defaults = {
+    size: [10, 10, 10],
+    lineWidth: 1
+  }
+  const {size, lineWidth} = Object.assign({}, defaults, params)
+
   const [width, length, height] = size
   const halfWidth = width * 0.5
   const halfLength = length * 0.5
@@ -35,15 +40,15 @@ export default function drawCuboid (regl, params) {
 
     attributes: {
       position,
-    normal},
+      normal},
     elements: cells,
     uniforms: {
       model: (context, props) => props.model || mat4.identity([]),
-      color: regl.prop('color'),
-      angle: ({tick}) => 0.01 * tick
+      color: regl.prop('color')
+      // angle: ({tick}) => 0.01 * tick
     },
     primitive: 'line strip',
-    lineWidth: Math.min(2, regl.limits.lineWidthDims[1]),
+    lineWidth: Math.min(lineWidth, regl.limits.lineWidthDims[1]),
 
     depth: {
       enable: true,
