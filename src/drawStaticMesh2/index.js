@@ -3,19 +3,27 @@ import mat4 from 'gl-mat4'
 
 export default function drawMesh (regl, params = {extras: {}}) {
   const {prop, buffer} = regl
-  const {geometry} = params
+  const defaults = {
+    dynamicCulling: false,
+    geometry: undefined
+  }
+  const {geometry, dynamicCulling} = Object.assign({}, defaults, params)
 
   // vertex colors or not ?
   const hasIndices = (geometry.indices && geometry.indices.length > 0)
   const hasNormals = (geometry.normals && geometry.normals.length > 0)
   const hasVertexColors = (geometry.colors && geometry.colors.length > 0)
-  //console.log('has vertex colors', hasVertexColors)
+  const cullFace = dynamicCulling ? function (context, props) {
+    const isOdd = ([props.model[0], props.model[5], props.model[10]].filter(x => x < 0).length) & 1 // count the number of negative components & deterine if that is odd or even
+    return isOdd ? 'front' : 'back'
+  } : 'front'
+  // console.log('has vertex colors', hasVertexColors)
 
   const vert = hasVertexColors ? glslify(__dirname + '/shaders/mesh-vcolor.vert') : glslify(__dirname + '/shaders/mesh.vert')
   const frag = hasVertexColors ? glslify(__dirname + '/shaders/mesh-vcolor.frag') : glslify(__dirname + '/shaders/mesh.frag')
 
-  //const vert = glslify(__dirname + '/shaders/mesh-vcolor.vert')
-  //const frag = glslify(__dirname + '/shaders/mesh-vcolor.frag')
+  // const vert = glslify(__dirname + '/shaders/mesh-vcolor.vert')
+  // const frag = glslify(__dirname + '/shaders/mesh-vcolor.frag')
 
   let commandParams = {
     vert,
@@ -27,12 +35,12 @@ export default function drawMesh (regl, params = {extras: {}}) {
       printableArea: (context, props) => props.printableArea || [0, 0]
     },
     attributes: {
-      position: buffer(geometry.positions),
-      //color: { constant: [1, 0, 0, 1] }
+      position: buffer(geometry.positions)
+      // color: { constant: [1, 0, 0, 1] }
     },
     cull: {
       enable: true,
-      face: 'back'
+      face: cullFace
     },
     blend: {
       enable: true,
@@ -48,14 +56,14 @@ export default function drawMesh (regl, params = {extras: {}}) {
   } else if (hasIndices) {
     // FIXME: not entirely sure about all this
     const indices = geometry.indices
-    /*let type
+    /* let type
     if (indices instanceof Uint32Array && regl.hasExtension('oes_element_index_uint')) {
       type = 'uint32'
     }else if (indices instanceof Uint16Array) {
       type = 'uint16'
     } else {
       type = 'uint8'
-    }*/
+    } */
 
     commandParams.elements = regl.elements({
       // type,
