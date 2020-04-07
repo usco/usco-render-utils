@@ -15,11 +15,10 @@
   "author": "Mark 'kaosat-dev' Moissette",
   "license": "MIT",
   "dependencies": {
-    "gl-mat4": "^1.1.4",
-    "gl-vec3": "^1.0.3",
+    "gl-mat4": "1.1.4",
+    "gl-vec3": "1.0.3",
     "glsl-fog": "0.0.1",
-    "glslify": "^5.0.2",
-    "glslify-sync": "^2.0.0"
+    "glslify": "7.0.0"
   },
   "devDependencies": {
     "ava": "^0.15.2",
